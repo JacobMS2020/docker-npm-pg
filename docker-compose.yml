@@ -24,7 +24,6 @@ services:
       - "443:443"
       - "81:81"
     environment:
-      # Postgres connection params:
       DB_POSTGRES_HOST: db_postgres
       DB_POSTGRES_PORT: 5432
       DB_POSTGRES_USER: npm
@@ -37,3 +36,6 @@ services:
       - db_postgres
     networks:
       - main-network
+
+networks:
+  main-network:
