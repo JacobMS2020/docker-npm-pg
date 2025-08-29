@@ -39,3 +39,4 @@ services:
 
 networks:
   main-network:
+    external: true
