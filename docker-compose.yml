@@ -1,6 +1,6 @@
 services:
-  db_postgres:
-    container_name: db_postgres
+  postgres:
+    container_name: postgres
     image: postgres:15-alpine
     restart: unless-stopped
     ports:
@@ -11,7 +11,7 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./postgres_init-scripts:/docker-entrypoint-initdb.d
     networks:
       - main-network
 
@@ -24,16 +24,16 @@ services:
       - "443:443"
       - "81:81"
     environment:
-      DB_POSTGRES_HOST: db_postgres
-      DB_POSTGRES_PORT: 5432
-      DB_POSTGRES_USER: npm
-      DB_POSTGRES_PASSWORD: npm
-      DB_POSTGRES_NAME: npm
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: npm
+      POSTGRES_PASSWORD: npm
+      POSTGRES_NAME: npm
     volumes:
       - ./nginxProxyManager/data:/data
       - ./nginxProxyManager/letsencrypt:/etc/letsencrypt
     depends_on:
-      - db_postgres
+      - postgres
     networks:
       - main-network
 
